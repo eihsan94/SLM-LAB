@@ -1,0 +1,29 @@
+{
+  "version": 3,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 21,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "dev",
+      "displayName": "SLM learning lab",
+      "description": "Configure a debug build with the project-local vcpkg checkout",
+      "binaryDir": "${sourceDir}/build",
+      "toolchainFile": "${sourceDir}/.local/vcpkg/scripts/buildsystems/vcpkg.cmake",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    {
+      "name": "dev",
+      "displayName": "Build the SLM learning lab",
+      "configurePreset": "dev",
+      "configuration": "Debug"
+    }
+  ]
+}
