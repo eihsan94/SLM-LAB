@@ -1,5 +1,24 @@
 .PHONY: all setup configure build run lesson clean
 
+# Allow the memorable `make lesson my_topic` form. GNU Make normally treats
+# `my_topic` as a second target, so it is captured as the lesson ID only when
+# `lesson` is one of the requested goals.
+ifneq ($(filter lesson,$(MAKECMDGOALS)),)
+LESSON_POSITIONAL_GOALS := $(filter-out lesson,$(MAKECMDGOALS))
+ifneq ($(word 2,$(LESSON_POSITIONAL_GOALS)),)
+$(error Use one lesson ID: make lesson my_topic)
+endif
+LESSON_POSITIONAL_ID := $(firstword $(LESSON_POSITIONAL_GOALS))
+ifneq ($(LESSON_POSITIONAL_ID),)
+ifeq ($(origin NAME),command line)
+$(error Use either `make lesson my_topic` or `make lesson NAME=my_topic`, not both)
+endif
+override NAME := $(LESSON_POSITIONAL_ID)
+%:
+	@:
+endif
+endif
+
 CMAKE ?= cmake
 BUILD_DIR ?= build
 VCPKG_ROOT ?= $(CURDIR)/.local/vcpkg

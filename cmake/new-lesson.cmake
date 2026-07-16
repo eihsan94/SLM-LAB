@@ -4,7 +4,7 @@ get_filename_component(SLM_ROOT "${CMAKE_CURRENT_LIST_DIR}/.." ABSOLUTE)
 
 if(NOT DEFINED LESSON_ID OR LESSON_ID STREQUAL "")
     message(FATAL_ERROR
-        "A lesson ID is required. Example: make lesson NAME=dot_product")
+        "A lesson ID is required. Example: make lesson dot_product")
 endif()
 
 # The ID becomes both a directory name and part of a C++ function name.

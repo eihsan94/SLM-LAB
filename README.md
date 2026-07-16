@@ -179,7 +179,7 @@ in sync.
 Generate a compiling lesson skeleton with:
 
 ```sh
-make lesson NAME=my_topic
+make lesson my_topic
 ```
 
 The portable CMake form, including on Windows, is:
@@ -196,7 +196,8 @@ lessons/my_topic/lesson.cpp
 ```
 
 The title is generated from the ID, while the category and syllabus order use
-safe defaults. Set all metadata explicitly when needed:
+safe defaults. The `NAME=...` form remains available when setting all metadata
+explicitly:
 
 ```sh
 make lesson \
