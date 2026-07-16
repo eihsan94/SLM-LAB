@@ -1,5 +1,14 @@
 # SLM Learning Lab
 
+
+
+https://github.com/user-attachments/assets/8b31db69-c7bf-4349-9faf-739dfeca5c5d
+
+
+
+
+
+
 This repository is a syllabus for learning how to build a small language model
 from scratch. Each lesson keeps its mathematical algorithm visible and connects
 the computed values to reusable controls and visualizations.
