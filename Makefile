@@ -1,4 +1,4 @@
-.PHONY: all setup configure build run clean
+.PHONY: all setup configure build run lesson clean
 
 CMAKE ?= cmake
 BUILD_DIR ?= build
@@ -32,6 +32,15 @@ build: $(CONFIGURE_STAMP)
 
 run: build
 	"$(BUILD_DIR)/bin/slm_lab" $(LESSON)
+
+lesson:
+	$(CMAKE) \
+		-DLESSON_ID="$(NAME)" \
+		-DLESSON_TITLE="$(TITLE)" \
+		-DLESSON_CATEGORY="$(CATEGORY)" \
+		-DLESSON_ORDER="$(ORDER)" \
+		-DLESSON_TEMPLATE="$(TEMPLATE)" \
+		-P cmake/new-lesson.cmake
 
 clean:
 	$(CMAKE) -E remove_directory "$(BUILD_DIR)"

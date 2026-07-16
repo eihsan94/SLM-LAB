@@ -1,0 +1,30 @@
+#include <slm/engine/controls.hpp>
+#include <slm/engine/lesson.hpp>
+#include <slm/engine/show.hpp>
+
+SLM_LESSON(@LESSON_ID@,
+           "@LESSON_TITLE_CPP@",
+           "@LESSON_CATEGORY_CPP@",
+           @LESSON_ORDER@) {
+    // 1. INPUTS
+    // Keep adjustable values in ordinary static C++ variables or a state struct.
+
+    // 2. MATH
+    // Write the equation and algorithm explicitly. Keep new loops visible here.
+
+    // 3. VISUALIZE
+    // Pass the values computed above to the reusable engine helpers.
+    slm::show::text(
+        "Start here",
+        "1. Define the lesson inputs.\n"
+        "2. Write the mathematical algorithm.\n"
+        "3. Replace this panel with the visualization that explains it best.");
+
+    // Helper examples to uncomment when they match the concept:
+    // slm::controls::scalar("Input", input, -5.0F, 5.0F);
+    // slm::controls::vector("Values", values, -5.0F, 5.0F);
+    // slm::controls::matrix("Parameters", parameters, -2.0F, 2.0F);
+    // slm::show::matrix("Result", result);
+    // slm::show::plot2d("Function", x, y);
+    // slm::show::plot3d("Surface", x, y, z);
+}

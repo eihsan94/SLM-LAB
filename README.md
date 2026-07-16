@@ -32,7 +32,10 @@ slm/
 ├── vcpkg.json
 ├── main.cpp
 ├── cmake/
-│   └── bootstrap-vcpkg.cmake
+│   ├── bootstrap-vcpkg.cmake
+│   ├── new-lesson.cmake
+│   └── templates/
+│       └── lesson-blank.cpp.in
 ├── libs/
 │   ├── math/
 │   │   ├── include/slm/math/
@@ -173,26 +176,58 @@ in sync.
 
 ## Adding a lesson
 
-Add one source file:
+Generate a compiling lesson skeleton with:
+
+```sh
+make lesson NAME=my_topic
+```
+
+The portable CMake form, including on Windows, is:
+
+```sh
+cmake -DLESSON_ID=my_topic -P cmake/new-lesson.cmake
+```
+
+The ID must use lowercase `snake_case`. It becomes both the lesson directory
+and its stable registration ID. The command creates one source file:
 
 ```text
 lessons/my_topic/lesson.cpp
 ```
 
-Give it metadata and a frame function:
+The title is generated from the ID, while the category and syllabus order use
+safe defaults. Set all metadata explicitly when needed:
+
+```sh
+make lesson \
+  NAME=dot_product \
+  TITLE="Dot Product" \
+  CATEGORY="Linear Algebra" \
+  ORDER=20
+```
+
+The generated frame keeps the learning sequence visible:
 
 ```cpp
-#include <slm/engine/lesson.hpp>
-
-SLM_LESSON(my_topic, "My Topic", "Math Foundations", 10) {
-    // 1. Keep ordinary C++ state.
-    // 2. Write the math being learned.
-    // 3. Pass the results to controls::* and show::* helpers.
+SLM_LESSON(my_topic, "My Topic", "Uncategorized", 100) {
+    // 1. INPUTS: define adjustable values.
+    // 2. MATH: write the new equation and loops explicitly.
+    // 3. VISUALIZE: pass computed values to controls::* and show::*.
 }
 ```
 
-The four metadata values are its stable ID, visible title, category, and
-syllabus order. The lesson appears in the dashboard automatically.
+The generator refuses invalid IDs, duplicate registrations, and overwrites.
+There is still no CMake or registry file to edit: the lesson appears in the
+dashboard automatically on the next run.
+
+```sh
+make run LESSON=my_topic
+```
+
+The scaffolder already uses a named template internally. The current `blank`
+template teaches the inputs -> math -> visualization flow. Focused `plot2d` and
+`plot3d` templates can be added later after their repeated lesson patterns are
+clear, without changing lesson discovery or the viewer.
 
 ## Reusable learner helpers
 
