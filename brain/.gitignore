@@ -1,0 +1,33 @@
+# Environment and local configuration
+.venv/
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+
+# Quality tools
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/
+
+# Generated ML assets (keep only the documentation files)
+data/*
+!data/README.md
+artifacts/*
+!artifacts/README.md
+runs/
+checkpoints/
